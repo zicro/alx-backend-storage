@@ -1,11 +1,13 @@
---vakudate email
-DELIMITER // ;
-CREATE TRIGGER validate_email BEFORE UPDATE ON users
+-- Email validation to sent
+
+DELIMITER //
+CREATE TRIGGER validation_email
+BEFORE UPDATE
+ON users
 FOR EACH ROW
 BEGIN
-	IF NEW.email <> OLD.email THEN
-		SET NEW.valid_email = 0;
-	END IF;
-END;
-//
-DELIMITER ;
+    IF NEW.email != OLD.email THEN
+    SET NEW.valid_email = 0;
+    END IF;
+END; //
+DELIMITER;
